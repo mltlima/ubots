@@ -1,7 +1,7 @@
 {
   "name": "flowpay-backend",
   "version": "1.0.0",
-  "description": "FlowPay Backend API - Phase 1",
+  "description": "FlowPay Attendance Distribution API",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
