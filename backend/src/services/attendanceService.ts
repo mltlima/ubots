@@ -183,3 +183,8 @@ export function getDashboard() {
     teams: teamsSummary
   };
 }
+
+export function resetState(): void {
+  attendances.length = 0;
+}
+
