@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import routes from './routes';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -7,14 +8,16 @@ const PORT = process.env.PORT || 3001;
 // Configurar CORS
 app.use(cors());
 
-// Parser para JSON se necessário no futuro
+// Parser para JSON
 app.use(express.json());
+
+// Registrar rotas
+app.use(routes);
 
 // Endpoint GET /health
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({
-    status: 'ok',
-    service: 'flowpay-attendance-api'
+    status: 'ok'
   });
 });
 
