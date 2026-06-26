@@ -5,6 +5,8 @@ import SummaryCard from '../components/SummaryCard';
 import TeamCard from '../components/TeamCard';
 import StatusBadge from '../components/StatusBadge';
 import LoadingErrorState, { ErrorBanner } from '../components/LoadingErrorState';
+import CreateAttendanceForm from '../components/CreateAttendanceForm';
+import FinishAttendanceButton from '../components/FinishAttendanceButton';
 import { Attendance } from '../types/api';
 import './DashboardPage.css';
 
@@ -84,6 +86,11 @@ export default function DashboardPage() {
           </div>
         </header>
 
+        {/* Formulário de Criação de Atendimento */}
+        <section className="create-attendance-section">
+          <CreateAttendanceForm onSuccess={refetch} />
+        </section>
+
         {/* Cards de Métricas */}
         <section className="metrics-grid">
           <SummaryCard
@@ -126,6 +133,7 @@ export default function DashboardPage() {
                   <th>Atendente</th>
                   <th>Início</th>
                   <th>Status</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,12 +159,19 @@ export default function DashboardPage() {
                       <td>
                         <StatusBadge status={att.status} />
                       </td>
+                      <td className="actions-cell">
+                        {att.status === 'ACTIVE' ? (
+                          <FinishAttendanceButton attendanceId={att.id} onSuccess={refetch} />
+                        ) : (
+                          <span className="no-actions">-</span>
+                        )}
+                      </td>
                     </tr>
                   );
                 })}
                 {currentAttendances.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="table-empty-state">
+                    <td colSpan={7} className="table-empty-state">
                       Nenhum atendimento ativo ou em fila no momento.
                     </td>
                   </tr>
